@@ -3,10 +3,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#0d6efd",
-        secondary: "#6f42c1",
+        primary: "#D39353",
+        secondary: "#F39353",
         info: "#0dcaf0",
-        warning: "#fd7e14",
 
         authBgS: "#feb206",
         authBgE: "#f9cb33",

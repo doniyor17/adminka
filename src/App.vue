@@ -1,73 +1,54 @@
 <script setup lang="ts">
 import { ref } from "vue";
 const isToggled = ref(false);
-const w = ref(300);
+const w = ref(0);
 
 function onToggle() {
   isToggled.value = !isToggled.value;
-  if (!isToggled.value) w.value = 300;
-  else w.value = 0;
+  if (!isToggled.value) w.value = 0;
+  else w.value = 300;
 }
 </script>
 
 <template>
   <div
-    class="h-16 bg-navBg shadow-md p-4 fixed top-0 right-0 transition-all duration-500 flex items-center"
+    class="h-16 bg-primary shadow-md p-4 fixed top-0 right-0 transition-all duration-500 flex items-center z-50"
     :style="`width: calc(100% - ${w}px)`"
   >
     <button class="me-auto" @click="onToggle">
       <span class="fa-solid fa-bars text-xl" />
     </button>
-    <!-- <router-link :to="{ name: AdminRoutes.LOGIN }" class="text-[18px] rounded-md mb-3 p-2]">
-      <i class="fa-solid fa-right-from-bracket pl-8"></i>
-      Logout
-    </router-link> -->
   </div>
   <div
-    class="bg-gray-200 fixed top-0 w-[300px] left-0 h-screen transition-all duration-500 text-center px-5"
-    :class="{ '-translate-x-[300px]': isToggled }"
+    class="bg-white fixed top-0 w-[300px] left-0 h-screen transition-all duration-500 text-center px-5"
+    :class="{ '-translate-x-[300px]': !isToggled }"
   >
     <div class="flex justify-center mt-5 mb-[200px]">
-      <span class="me-2 w-[6px] bg-[#0d6efd]" />
-      <h2 class="uppercase text-[32px] font-[700]">Admin</h2>
+      <span class="me-2 w-[6px] bg-primary" />
+      <h2 class="uppercase text-[34px] font-[600]">نور عيني</h2>
     </div>
-    <div class="text-left">
-      <!-- <router-link
-        :to="{ name: AdminRoutes.HOME }"
-        class="block w-5/6 transition-all text-left text-[18px] rounded-md mx-auto mb-3 p-2"
+    <div class="text-left" @click="onToggle">
+      <router-link
+        to="/"
+        class="block w-5/6 transition-all text-left text-[18px] rounded-md mx-auto mb-3 p-2 link-router"
       >
         <span class="fa-solid fa-file-contract pl-8" />
-        Current exam
-      </router-link> -->
-      <!-- <router-link
-        :to="{ name: AdminRoutes.LISTENING }"
-        class="block w-5/6 transition-all text-left text-[18px] rounded-md mx-auto mb-3 p-2"
-      >
-        <span class="fa-solid fa-volume-up pl-8" />
-        Listening
+        Hisobot
       </router-link>
       <router-link
-        :to="{ name: AdminRoutes.READING }"
-        class="block w-5/6 transition-all text-left text-[18px] rounded-md mx-auto mb-3 p-2"
+        to="/orders"
+        class="block w-5/6 transition-all text-left text-[18px] rounded-md mx-auto mb-3 p-2 link-router"
       >
-        <span class="fa-solid fa-book-open pl-8" />
-        Reading
+        <span class="fa-solid fa-file-contract pl-8" />
+        Buyurtmalarim
       </router-link>
       <router-link
-        :to="{ name: AdminRoutes.WRITING }"
-        class="block w-5/6 transition-all text-left text-[18px] rounded-md mx-auto mb-3 p-2"
+        to="/order/add"
+        class="block w-5/6 transition-all text-left text-[18px] rounded-md mx-auto mb-3 p-2 link-router"
       >
-        <i class="fa-solid fa-pen pl-8" />
-        Writing
+        <span class="fa-solid fa-plus pl-8" />
+        Yangi buyurtma
       </router-link>
-      <router-link
-        :to="{ name: AdminRoutes.EXAM_RESULTS }"
-        class="block w-5/6 transition-all text-left text-[18px] rounded-md mx-auto mb-3 p-2"
-      >
-        <i class="fa-solid fa-pen pl-8" />
-        Results
-      </router-link> -->
-      <router-link>Nima</router-link>
     </div>
   </div>
   <div
@@ -78,7 +59,10 @@ function onToggle() {
   </div>
 </template>
 
-<style scoped>
+<style>
+body {
+  font-family: 'Josefin Sans', sans-serif;
+}
 .full {
   width: 100%;
 }
@@ -86,7 +70,12 @@ function onToggle() {
   width: calc(100% - var());
 }
 .router-link-exact-active {
-  background-color: #0d6efd;
+  background-color: #fff !important;
+  color: #222 !important;
+  border: 2px solid #D39353;
+}
+.link-router  {
+  background-color: #D39353;
   color: white;
 }
 </style>
