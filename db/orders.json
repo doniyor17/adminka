@@ -1,5 +1,22 @@
 {
-    "orders": [
-        
-    ]
+  "orders": [
+    {
+      "id": "f88c",
+      "status": "Qabul qilindi",
+      "acceptedAt": 1706376443358,
+      "title": "Niqob",
+      "cloth": "Bayan",
+      "color": "Ayvriy",
+      "date": 1706376443358,
+      "price": 320000,
+      "partialPrice": null,
+      "payment": "full",
+      "name": "Maryam",
+      "address": "jxkhfksd kjhkjhkjh",
+      "phone": "+998990082217",
+      "deliveryType": "yandex",
+      "deliveryCost": 12000,
+      "description": ""
+    }
+  ]
 }
