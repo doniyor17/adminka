@@ -1,14 +1,21 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import { useOrder } from '../composables';
+import { IOrder } from '../models';
 
-const { router } = useOrder();
-function onSelectOrder(id: number | string) {
-    router.push({name: 'single-order', params: {id}})
+const { router, orders, fetchOrders } = useOrder();
+function onSelectOrder(order: IOrder) {
+    router.push({name: 'single-order', params: {id: order.id}})
 }
+
+onMounted(async () => {
+    await fetchOrders()
+})
 </script>
 
 <template>
-    <table class="w-full">
+    <div v-if="!orders.length">Ma'lumotlar topiplmadi</div>
+    <table else class="w-full">
         <thead>
             <tr class="text-center border-b-[2px]">
                 <th class="w-[30%]" >Nomi</th>
@@ -18,11 +25,11 @@ function onSelectOrder(id: number | string) {
             </tr>
         </thead>
         <tbody>
-            <tr class="text-center border-b-[1px] cursor-pointer" @click="onSelectOrder('sss')">
-                <td class="py-2 truncate">Jilbaab</td>
-                <td class="py-2 truncate">10.01.2024</td>
-                <td class="py-2 truncate">Bayan</td>
-                <td class="py-2 truncate">Tikuvda</td>
+            <tr v-for="order of orders" :key="order?.name" class="text-center border-b-[1px] cursor-pointer" @click="onSelectOrder(order)">
+                <td class="py-2 truncate">{{ order.title }}</td>
+                <td class="py-2 truncate">{{ order.date }}</td>
+                <td class="py-2 truncate">{{ order.cloth }}</td>
+                <td class="py-2 truncate">{{ order.status }}</td>
             </tr>
         </tbody>
     </table>

@@ -1,58 +1,76 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
+import { reactive, ref } from 'vue';
+import axios from 'axios';
+import { IOrder } from '../models'
 
 import { NSpace, NInput, NInputNumber, NDatePicker, NSelect } from 'naive-ui';
 
-const newOrder = reactive({
-    title: '',
-    cloth: '',
-    color: '',
-    date: Date.now(),
-    price: null,
-    payment: '',
-    name: '',
-    address: '',
-    phone: '',
-    deliveryType: '',
-    deliveryCost: null,
-});
+const newOrder = reactive(newOrderFn());
 
 const paymentOptions = ref([
-    {
-        label: "To'liq",
-        value: 'full'
-    },
-    {
-        label: "To'liq emas",
-        value: 'partial'
-    }
+{
+    label: "To'liq",
+    value: 'full'
+},
+{
+    label: "To'liq emas",
+    value: 'partial'
+}
 ]);
 
 const deliveryOptions = ref([
-    {
-        label: "Yandex",
-        value: 'yandex'
-    },
-    {
-        label: "Pochta",
-        value: 'post'
-    }
+{
+    label: "Yandex",
+    value: 'yandex'
+},
+{
+    label: "Pochta",
+    value: 'post'
+}
 ]);
 
-function onSubmit() {
-    console.log('Submitted');
+function newOrderFn(): IOrder {
+    return {
+        status: 'Qabul qilindi',
+        acceptedAt: Date.now(),
+        title: '',
+        cloth: '',
+        color: '',
+        date: Date.now(),
+        price: null,
+        partialPrice: null,
+        payment: 'full',
+        name: '',
+        address: '',
+        phone: '',
+        deliveryType: '',
+        deliveryCost: null,
+        description: ''
+    }
 }
 
-onMounted(() => {
-    // console.log(route.params.id);
-})
+function onSubmit() {    
+    if (!newOrder.cloth && !newOrder.color && !newOrder.date && !newOrder.deliveryCost && !newOrder.deliveryType && !newOrder.name && !newOrder.payment && !newOrder.phone && !newOrder.price && !newOrder.title) {
+        return;
+    }
+    
+    axios.post('http://localhost:3000/orders', newOrder)
+    .then((res) => {
+        if (res.status === 201) {
+            alert('Buyurtma qabul qilindi');
+            newOrderFn();
+        }
+        
+    })
+    .catch(err => alert(`Xatolik yuz berdi: ${err?.message}`))
+}
 </script>
 
 <template>
     <form @submit.prevent="onSubmit">
         <div>Libos nomi</div>
         <n-space vertical class="mb-3">
-            <n-input v-model:value="newOrder.name" type="text" placeholder="Buyurtma: nima tikamiz?" />
+            <n-input v-model:value="newOrder.title" type="text" placeholder="Buyurtma: nima tikamiz?" />
         </n-space>
         <div>Mato turi</div>
         <n-space vertical class="mb-3">
@@ -91,6 +109,12 @@ onMounted(() => {
                     />
                 </n-space>
             </div>
+        </div>
+        <div v-if="newOrder.payment=== 'partial'">
+            <div>O'tkazilgan summa</div>
+            <n-space vertical class="mb-3">
+                <n-input-number v-model:value="newOrder.partialPrice" type="text" placeholder="500 000" />
+            </n-space>
         </div>
         <div class="text-center font-bold text-[18px]">Mijoz ma'lumotlari</div>
         <div class="flex items-center">
@@ -134,7 +158,7 @@ onMounted(() => {
         </div>
         <div class="text-center font-bold text-[18px]">Alohida qayd</div>
         <n-space vertical class="mb-3">
-            <n-input v-model:value="newOrder.address" type="textarea" placeholder="Yubka sal uzunroq bo'lsin" />
+            <n-input v-model:value="newOrder.description" type="textarea" placeholder="Yubka sal uzunroq bo'lsin" />
         </n-space>
         <div>
             <button class="btn-primary shadow-lg" type="submit">Buyurtmani qo'shish</button>
