@@ -32,7 +32,7 @@ onMounted(async () => {
             <tbody>
                 <tr v-for="order of orders" :key="order?.name" class="text-center border-b-[1px] cursor-pointer" @click="onSelectOrder(order)">
                     <td class="py-2 truncate">{{ order.title }}</td>
-                    <td class="py-2 truncate">{{ toDDMMYYYYDot(order.date) }}</td>
+                    <td class="py-2 truncate">{{ toDDMMYYYYDot(order.date ? order.date : 0) }}</td>
                     <td class="py-2 truncate">{{ order.cloth }}</td>
                     <td class="py-2 truncate">{{ order.status }}</td>
                 </tr>
