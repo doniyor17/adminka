@@ -6,16 +6,17 @@ import { IOrder } from '../models'
 import { NSpace, NInput, NInputNumber, NDatePicker, NSelect } from 'naive-ui';
 
 const newOrder = reactive(newOrderFn());
+const source = ref('instagram');
 
 const paymentOptions = ref([
-{
-    label: "To'liq",
-    value: 'full'
-},
-{
-    label: "To'liq emas",
-    value: 'partial'
-}
+    {
+        label: "To'liq",
+        value: 'full'
+    },
+    {
+        label: "To'liq emas",
+        value: 'partial'
+    }
 ]);
 
 const deliveryOptions = ref([
@@ -29,6 +30,21 @@ const deliveryOptions = ref([
 }
 ]);
 
+const sourceOptions = ref([
+    {
+        label: "Telegram",
+        value: 'telegram'
+    },
+    {
+        label: "Instagram",
+        value: 'instagram'
+    },
+    {
+        label: "Boshqa",
+        value: 'other'
+    }
+]);
+
 function newOrderFn(): IOrder {
     return {
         status: 'Qabul qilindi',
@@ -36,6 +52,8 @@ function newOrderFn(): IOrder {
         title: '',
         cloth: '',
         color: '',
+        source: '',
+        isClothtaken: 'no-taken',
         date: Date.now(),
         price: null,
         partialPrice: null,
@@ -72,10 +90,24 @@ function onSubmit() {
         <n-space vertical class="mb-3">
             <n-input v-model:value="newOrder.title" type="text" placeholder="Buyurtma: nima tikamiz?" />
         </n-space>
-        <div>Mato turi</div>
-        <n-space vertical class="mb-3">
-            <n-input v-model:value="newOrder.cloth" type="text" placeholder="Mato nomi" />
-        </n-space>
+        <div class="flex items-center">
+            <div class="w-[50%]">
+                <div>Buyurtma olindi</div>
+                <n-space vertical class="mb-3">
+                    <n-select
+                        v-model:value="source"
+                        class="border-primary rounded-lg"
+                        :options="sourceOptions"
+                    />
+                </n-space>
+            </div>
+            <div class="w-[50%]">
+                <div>Mato turi</div>
+                <n-space vertical class="mb-3">
+                    <n-input v-model:value="newOrder.cloth" type="text" placeholder="Mato nomi" />
+                </n-space>
+            </div>
+        </div>
         <div class="flex items-center">
             <div class="w-[50%]">
                 <div>Libos rangi</div>
@@ -101,11 +133,11 @@ function onSubmit() {
                 <div>To'lov</div>
                 <n-space vertical class="mb-3">
                     <n-select
-                    v-model:value="newOrder.payment"
-                    filterable
-                    clearable
-                    placeholder="To'lov turini tanlang"
-                    :options="paymentOptions"
+                        v-model:value="newOrder.payment"
+                        filterable
+                        clearable
+                        placeholder="To'lov turini tanlang"
+                        :options="paymentOptions"
                     />
                 </n-space>
             </div>

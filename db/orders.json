@@ -1,22 +1,24 @@
 {
   "orders": [
     {
-      "id": "f88c",
+      "id": "7eae",
       "status": "Qabul qilindi",
-      "acceptedAt": 1706376443358,
-      "title": "Niqob",
+      "acceptedAt": 1706549656579,
+      "title": "Hijaab",
       "cloth": "Bayan",
-      "color": "Ayvriy",
-      "date": 1706376443358,
-      "price": 320000,
-      "partialPrice": null,
-      "payment": "full",
-      "name": "Maryam",
-      "address": "jxkhfksd kjhkjhkjh",
-      "phone": "+998990082217",
-      "deliveryType": "yandex",
-      "deliveryCost": 12000,
-      "description": ""
+      "color": "Jigarrang",
+      "source": "",
+      "isClothtaken": "taken",
+      "date": 1707332400000,
+      "price": 300000,
+      "partialPrice": 112100,
+      "payment": "partial",
+      "name": "Gulbadoq",
+      "address": "Some unknown address",
+      "phone": "+998994887352",
+      "deliveryType": "post",
+      "deliveryCost": 32000,
+      "description": "Hech qanday text yo'q"
     }
   ]
 }

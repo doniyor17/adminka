@@ -18,8 +18,10 @@
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "axios": "^1.6.1",
+    "dayjs": "^1.11.10",
     "json-server": "^1.0.0-alpha.23",
     "lodash.get": "^4.4.2",
+    "v-slim-mask": "^1.0.24",
     "vue": "^3.3.11",
     "vue-router": "^4.2.5"
   },

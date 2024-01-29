@@ -8,7 +8,9 @@ export interface IOrder {
     title: string
     cloth: string
     color: string
-    date: NumOrString
+    source: string
+    date: number | null | undefined
+    isClothtaken: string
     price: NumOrNull
     partialPrice?: NumOrNull
     payment: string
