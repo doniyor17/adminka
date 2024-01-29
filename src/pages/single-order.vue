@@ -53,7 +53,7 @@ const clothOptions = ref([
 ]);
 
 function onStatusChange(status: string) {
-    axios.patch(`http://localhost:3000/orders/${route.params.id}`, {
+    axios.patch(`http://localhost:3001/orders/${route.params.id}`, {
         ...singleOrder.value,
         status
     }).then(({data}) => {
@@ -62,7 +62,7 @@ function onStatusChange(status: string) {
 }
 
 function onSourceChange(source: string) {    
-    axios.patch(`http://localhost:3000/orders/${route.params.id}`, {
+    axios.patch(`http://localhost:3001/orders/${route.params.id}`, {
         ...singleOrder.value,
         source
     }).then(({data}) => {
@@ -71,7 +71,7 @@ function onSourceChange(source: string) {
 }
 
 function onClothChange(cloth: string) {    
-    axios.patch(`http://localhost:3000/orders/${route.params.id}`, {
+    axios.patch(`http://localhost:3001/orders/${route.params.id}`, {
         ...singleOrder.value,
         isClothtaken: cloth
     }).then(({data}) => {
@@ -87,7 +87,7 @@ function onChangePrice() {
         partialTotal = (partialPrice.value - 0) + (singleOrder.value?.partialPrice - 0)
     }
     
-    axios.patch(`http://localhost:3000/orders/${route.params.id}`, {
+    axios.patch(`http://localhost:3001/orders/${route.params.id}`, {
         ...singleOrder.value,
         partialPrice: partialTotal
     }).then(({data}) => {

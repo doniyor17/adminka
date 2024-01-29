@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "serve:db": "json-server ./db/orders.json --watch",
+    "start": "json-server -p 3001 -w ./db/orders.json",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "lint": "npm run eslint:fix && npm run format:check",

@@ -72,7 +72,7 @@ function onSubmit() {
         return;
     }
     
-    axios.post('http://localhost:3000/orders', newOrder)
+    axios.post('http://localhost:3001/orders', newOrder)
     .then((res) => {
         if (res.status === 201) {
             alert('Buyurtma qabul qilindi');

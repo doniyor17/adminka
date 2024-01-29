@@ -10,7 +10,7 @@ export function useOrder() {
     const singleOrder = ref<IOrder | null>(null);
 
     async function fetchOrders() {
-        const { data } = await axios.get('http://localhost:3000/orders')
+        const { data } = await axios.get('http://localhost:3001/orders')
         
         if (!data?.length) {
             alert("Ro'yxatni yuklashda xatolik")
@@ -21,7 +21,7 @@ export function useOrder() {
     };
 
     async function fetchOrderByID(id: any) {
-        const { data } = await axios.get(`http://localhost:3000/orders/${id}`)
+        const { data } = await axios.get(`http://localhost:3001/orders/${id}`)
 
         if (!data) {
             alert("Ro'yxatni yuklashda xatolik")
