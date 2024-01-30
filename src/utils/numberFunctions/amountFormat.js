@@ -1,7 +1,7 @@
 import { isExponent, toExpo } from '@/utils/numberFunctions/isExponent.js';
 import floatSplitter from '@/utils/numberFunctions/floatSplitter.js';
 
-export default function (number, { dividTo = 3, replaceTo = ' ' } = {}) {
+export function amountFormat (number, { dividTo = 3, replaceTo = ' ' } = {}) {
   let str = number?.toString?.() || '';
   if (!number || (number && isNaN(number))) {
     str = number?.replace?.(/\s/g, '') || '';

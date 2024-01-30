@@ -2,9 +2,9 @@
 import { onMounted, ref } from 'vue';
 import { useOrder } from '../composables';
 import useDayjs from '../utils/dayjs';
-import amountFormat from '../utils/numberFunctions/amountFormat.js';
+import { amountFormat } from '../utils/numberFunctions/amountFormat.js';
 import { phoneMask } from '../utils/mask';
-import { NSpace, NSelect, NInputNumber } from 'naive-ui';
+import { NSpace, NSelect } from 'naive-ui';
 import axios from 'axios';
 
 const { route, fetchOrderByID, singleOrder } = useOrder();
