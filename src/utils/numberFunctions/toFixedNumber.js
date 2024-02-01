@@ -1,4 +1,4 @@
-import { isInt } from '@/utils/numberFunctions/digitChecker.js';
+import { isInt } from "@/utils/numberFunctions/digitChecker.js";
 
 export default function (num = 0, { toFix = 2, base = 10 } = {}) {
   const pow = Math.pow(base, toFix);

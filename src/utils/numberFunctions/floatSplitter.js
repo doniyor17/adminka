@@ -2,7 +2,7 @@ export default function splitFloat(n) {
   let res = {
     integer: 0,
     decimal: 0,
-    tiyin: 0
+    tiyin: 0,
   };
 
   if (!n) {
@@ -18,7 +18,7 @@ export default function splitFloat(n) {
     res = {
       integer: parseInt(m[1]),
       decimal: parseFloat(`0.${m[2]}`),
-      tiyin
+      tiyin,
     };
 
     return res;
@@ -27,7 +27,7 @@ export default function splitFloat(n) {
   res = {
     integer: n,
     decimal: 0,
-    tiyin: 0
+    tiyin: 0,
   };
 
   return res;

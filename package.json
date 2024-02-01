@@ -5,8 +5,6 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "serve:db": "json-server ./db/orders.json --watch",
-    "start": "json-server -p 3001 -w ./db/orders.json",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "lint": "npm run eslint:fix && npm run format:check",
@@ -20,11 +18,12 @@
     "@typescript-eslint/parser": "^6.13.1",
     "axios": "^1.6.1",
     "dayjs": "^1.11.10",
-    "json-server": "^1.0.0-alpha.23",
+    "firebase": "^10.7.2",
     "lodash.get": "^4.4.2",
     "v-slim-mask": "^1.0.24",
     "vue": "^3.3.11",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "vue-toastification": "^2.0.0-rc.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
