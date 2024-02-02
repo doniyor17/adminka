@@ -2,7 +2,7 @@
 import { useOrder } from "../composables";
 import { IOrder } from "../models";
 import useDayjs from "../utils/dayjs";
-import Loading from "../components/loading.vue";
+import Loader from "../components/loading.vue";
 
 const { router, orders, loading } = useOrder();
 const { toDDMMYYYYDot } = useDayjs();
@@ -13,8 +13,9 @@ function onSelectOrder(order: IOrder) {
 </script>
 
 <template>
-  <div v-if="!loading">
-    <Loading />
+  <pre>{{ loading }}</pre>
+  <div v-if="loading" class="bg-gray-400 py-4">
+    <Loader />
   </div>
   <div v-else>
     <div v-if="!orders.length" class="text-center pt-10 text-2xl font-semibold">

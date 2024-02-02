@@ -11,17 +11,18 @@ export function useOrder() {
   const orders = ref<IOrder[]>([]);
   const loading = ref<boolean>(false);
 
-  function fetchOrders() {
+  async function fetchOrders() {
     try {
       loading.value = true;
       let items: any = [];
-      onSnapshot(collection(db, "orders"), (orderSnapshot) => {
+      await onSnapshot(collection(db, "orders"), (orderSnapshot) => {
         orderSnapshot.forEach((order) => {
           items.push({
             id: order.id,
             ...order.data(),
           });
         });
+        loading.value = false;
         orders.value = items;
       });
     } catch (err) {
@@ -39,8 +40,8 @@ export function useOrder() {
     }
   }
 
-  onMounted(() => {
-    fetchOrders();
+  onMounted(async () => {
+    await fetchOrders();
   });
 
   return {

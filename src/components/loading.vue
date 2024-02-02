@@ -1,51 +1,69 @@
 <template>
-  <span class="loader">Loading</span>
+  <div class="text-center">
+    <span class="loader"></span>
+  </div>
 </template>
 
 <style scoped>
 .loader {
-  position: relative;
-  display: inline-block;
+  animation: rotate 1s infinite;
+  height: 50px;
+  width: 50px;
 }
-.loader::before {
-  content: "Loading";
-  color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 48px;
-  letter-spacing: 2px;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: floating 1s ease-out infinite alternate;
-}
-.loader::after {
-  content: "";
-  width: 100%;
-  height: 10px;
-  background: rgba(0, 0, 0, 0.15);
-  position: absolute;
-  left: 0;
-  top: 100%;
-  filter: blur(4px);
+
+.loader:before,
+.loader:after {
   border-radius: 50%;
-  box-sizing: border-box;
-  animation: animloader 1s ease-out infinite alternate;
+  content: "";
+  display: block;
+  height: 20px;
+  width: 20px;
+}
+.loader:before {
+  animation: ball1 1s infinite;
+  background-color: #fff;
+  box-shadow: 30px 0 0 #ff3d00;
+  margin-bottom: 10px;
+}
+.loader:after {
+  animation: ball2 1s infinite;
+  background-color: #ff3d00;
+  box-shadow: 30px 0 0 #fff;
 }
 
-@keyframes floating {
+@keyframes rotate {
+  0% { transform: rotate(0deg) scale(0.8) }
+  50% { transform: rotate(360deg) scale(1.2) }
+  100% { transform: rotate(720deg) scale(0.8) }
+}
+
+@keyframes ball1 {
   0% {
-    transform: translateY(0);
+    box-shadow: 30px 0 0 #ff3d00;
+  }
+  50% {
+    box-shadow: 0 0 0 #ff3d00;
+    margin-bottom: 0;
+    transform: translate(15px, 15px);
   }
   100% {
-    transform: translateY(-25px);
+    box-shadow: 30px 0 0 #ff3d00;
+    margin-bottom: 10px;
   }
 }
 
-@keyframes animloader {
+@keyframes ball2 {
   0% {
-    transform: scale(0.8);
+    box-shadow: 30px 0 0 #fff;
+  }
+  50% {
+    box-shadow: 0 0 0 #fff;
+    margin-top: -20px;
+    transform: translate(15px, 15px);
   }
   100% {
-    transform: scale(1.2);
+    box-shadow: 30px 0 0 #fff;
+    margin-top: 0;
   }
 }
 </style>
