@@ -1,11 +1,11 @@
 import { ref, onMounted } from "vue";
-import useDayjs from "../utils/dayjs";
+import useDayjs from "../utils/dayjs.js";
 import { useRoute, useRouter } from "vue-router";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../firebase.js";
 import { amountFormat } from "../utils/numberFunctions/amountFormat.js";
-import { phoneMask } from "../utils/mask";
-import { errorToast } from "../utils/toast.ts";
+import { phoneMask } from "../utils/mask.js";
+import { errorToast } from "../utils/toast.js";
 
 export function useSingleOrder() {
   const { toDDMMYYYYDot } = useDayjs();
@@ -107,7 +107,7 @@ export function useSingleOrder() {
   async function onDeleteOrder(id: any){
     const permitDelete = confirm("Buyurtmani o'chirishni xohlaysizmi?")
     if(!permitDelete) return;
-    const delOrder = await deleteDoc(doc(db, "orders", id));
+    await deleteDoc(doc(db, "orders", id));
     router.push('/')
   }
 

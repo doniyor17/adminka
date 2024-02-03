@@ -1,9 +1,9 @@
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { IOrder } from "../models";
+import { IOrder } from "../models/index.js";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
-import { db } from "../firebase";
-import { errorToast } from "../utils/toast";
+import { db } from "../firebase.js";
+import { errorToast } from "../utils/toast.js";
 
 export function useOrder() {
   const router = useRouter();
