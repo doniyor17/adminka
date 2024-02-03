@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import { IOrder } from "../models";
-import { useOrder } from "../composables";
+import { useOrder } from "../composables/index.ts";
 
 import { NSpace, NInput, NInputNumber, NDatePicker, NSelect } from "naive-ui";
 
@@ -81,22 +80,22 @@ function onSubmit() {
   }
 
   addOrder(newOrder);
-  (newOrder.status = "accepted"),
-    (newOrder.acceptedAt = Date.now()),
-    (newOrder.title = ""),
-    (newOrder.cloth = ""),
-    (newOrder.color = ""),
-    (newOrder.source = "instagram"),
-    (newOrder.isClothtaken = "no-taken"),
-    (newOrder.date = Date.now()),
-    (newOrder.price = null),
-    (newOrder.partialPrice = null),
-    (newOrder.payment = "full"),
-    (newOrder.name = ""),
-    (newOrder.address = ""),
-    (newOrder.phone = ""),
-    (newOrder.deliveryType = ""),
-    (newOrder.deliveryCost = null),
+  (newOrder.status = "accepted");
+    (newOrder.acceptedAt = Date.now());
+    (newOrder.title = "");
+    (newOrder.cloth = "");
+    (newOrder.color = "");
+    (newOrder.source = "instagram");
+    (newOrder.isClothtaken = "no-taken");
+    (newOrder.date = Date.now());
+    (newOrder.price = null);
+    (newOrder.partialPrice = null);
+    (newOrder.payment = "full");
+    (newOrder.name = "");
+    (newOrder.address = "");
+    (newOrder.phone = "");
+    (newOrder.deliveryType = "");
+    (newOrder.deliveryCost = null);
     (newOrder.description = "");
 }
 </script>

@@ -1,7 +1,7 @@
 import { ref, onMounted } from "vue";
 import useDayjs from "../utils/dayjs";
-import { useRoute } from "vue-router";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { useRoute, useRouter } from "vue-router";
+import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { amountFormat } from "../utils/numberFunctions/amountFormat.js";
 import { phoneMask } from "../utils/mask";
@@ -10,6 +10,7 @@ import { errorToast } from "../utils/toast.ts";
 export function useSingleOrder() {
   const { toDDMMYYYYDot } = useDayjs();
   const route = useRoute();
+  const router = useRouter();
   const status = ref("");
   const source = ref("");
   const clothTaken = ref("");
@@ -83,6 +84,33 @@ export function useSingleOrder() {
       source: source,
     });
   }
+  async function onChangePrice() {
+    const totalPrice = +singleOrder.value.partialPrice + (partialPrice.value - 0);
+
+    if(isNaN(totalPrice) && !totalPrice) return;
+      
+    const orderRef = doc(db, "orders", route.params.id);
+    if(totalPrice >= parseInt(singleOrder.value.price)) {
+      await updateDoc(orderRef, {
+        partialPrice: totalPrice,
+        payment: 'full'
+      });
+    } else {
+      await updateDoc(orderRef, {
+        partialPrice: totalPrice,
+      });
+    }
+    await fetchOrderByID(route.params.id);
+    partialPrice.value = null
+  }
+
+  async function onDeleteOrder(id: any){
+    const permitDelete = confirm("Buyurtmani o'chirishni xohlaysizmi?")
+    if(!permitDelete) return;
+    const delOrder = await deleteDoc(doc(db, "orders", id));
+    router.push('/')
+  }
+
   onMounted(async () => {
     await fetchOrderByID(route.params.id);
     status.value = singleOrder.value.status;
@@ -105,5 +133,7 @@ export function useSingleOrder() {
     onUpdateStatus,
     onClothChange,
     onSourceChange,
+    onDeleteOrder,
+    onChangePrice
   };
 }

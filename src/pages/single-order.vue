@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSingleOrder } from "../composables/singleOrder";
+import { useSingleOrder } from "../composables/singleOrder.ts";
 import { NSpace, NSelect } from "naive-ui";
 
 const {
@@ -17,11 +17,14 @@ const {
   onUpdateStatus,
   onClothChange,
   onSourceChange,
+  onDeleteOrder,
+  onChangePrice
 } = useSingleOrder();
 </script>
 
 <template>
-  <div class="flex items-center justify-between mb-3">
+  <div class="flex items-center justify-between mb-3"
+  >
     <div>
       <n-space vertical>
         <n-select
@@ -65,6 +68,13 @@ const {
   <div class="flex items-center mb-3">
     <div class="w-[35%] font-semibold">Nomi</div>
     <div class="w-[65%]">{{ singleOrder?.title }}</div>
+    <button
+    	v-if="status === 'done'"
+    	class="bg-btnBg w-[30px] h-[30px] rounded-md shadow-md"
+    	@click="onDeleteOrder(singleOrder.id)"
+    >
+      <span class="fa-solid fa-trash"/>
+    </button>
   </div>
   <div class="flex items-center mb-3">
     <div class="w-[35%] font-semibold">Rangi</div>
@@ -78,15 +88,28 @@ const {
   </div>
   <div class="flex items-center mb-3">
     <div class="w-[35%] font-semibold">To'lov turi</div>
-    <div v-if="singleOrder?.payment === 'full'" class="w-[65%]">To'liq</div>
-    <div v-else class="w-[65%] flex items-center">
+    <div
+    	v-if="singleOrder?.payment === 'full'"
+    	class="w-[65%]"
+    >
+      To'liq
+    </div>
+    <div
+    	v-else
+    	class="w-[65%] flex items-center"
+    >
       <div class="me-3">To'liq emas</div>
     </div>
   </div>
-  <div v-if="singleOrder?.payment !== 'full'" class="flex items-center mb-3">
+  <div
+  	v-if="singleOrder?.payment !== 'full'"
+  	class="flex items-center mb-3"
+  >
     <div class="w-[35%] font-semibold">To'langan summa</div>
     <div class="flex items-center w-[65%]">
-      <div class="me-1">{{ amountFormat(singleOrder?.partialPrice) }}</div>
+      <div class="me-1">
+        {{ amountFormat(singleOrder?.partialPrice) }}
+      </div>
       <input
         v-model="partialPrice"
         class="border-[2px] border-primary outline-none w-[50%] me-2 px-1 rounded-md"

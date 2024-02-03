@@ -1,7 +1,5 @@
 <template>
-  <div class="text-center">
-    <span class="loader"></span>
-  </div>
+  <span class="loader"></span>
 </template>
 
 <style scoped>
