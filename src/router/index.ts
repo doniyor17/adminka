@@ -4,7 +4,7 @@ import Home from "../pages/index.vue";
 import SingleOrder from "../pages/single-order.vue";
 import NewOrder from "../pages/addOrder.vue";
 import Login from "../pages/login.vue";
-import loadLayoutMiddleware from "./middleware";
+import loadLayoutMiddleware from "./middleware.js";
 
 const router = createRouter({
   history: createWebHistory(),

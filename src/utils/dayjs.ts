@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-import utc from "dayjs/plugin/utc";
+import relativeTime from "dayjs/plugin/relativeTime.js";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter.js";
+import customParseFormat from "dayjs/plugin/customParseFormat.js";
+import utc from "dayjs/plugin/utc.js";
 import "dayjs/locale/uz";
 import "dayjs/locale/uz-latn";
 import "dayjs/locale/ru";

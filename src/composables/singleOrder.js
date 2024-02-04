@@ -1,11 +1,11 @@
 import { ref, onMounted } from "vue";
-import useDayjs from "../utils/dayjs.js";
+import useDayjs from "../utils/dayjs.ts";
 import { useRoute, useRouter } from "vue-router";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
-import { db } from "../firebase.js";
+import { db } from "../firebase.ts";
 import { amountFormat } from "../utils/numberFunctions/amountFormat.js";
-import { phoneMask } from "../utils/mask.js";
-import { errorToast } from "../utils/toast.js";
+import { phoneMask } from "../utils/mask.ts";
+import { errorToast } from "../utils/toast.ts";
 
 export function useSingleOrder() {
   const { toDDMMYYYYDot } = useDayjs();
@@ -14,9 +14,9 @@ export function useSingleOrder() {
   const status = ref("");
   const source = ref("");
   const clothTaken = ref("");
-  const partialPrice = ref<number | null>(null);
+  const partialPrice = ref(null);
 
-  const singleOrder = ref<any>(null);
+  const singleOrder = ref(null);
   const statusOptions = ref([
     {
       label: "Qabul qilindi",
@@ -56,7 +56,7 @@ export function useSingleOrder() {
     },
   ]);
 
-  async function fetchOrderByID(id: any) {
+  async function fetchOrderByID(id) {
     const docSnap = await getDoc(doc(db, "orders", id));
 
     if (!docSnap.exists()) {
@@ -66,19 +66,19 @@ export function useSingleOrder() {
     }
   }
 
-  async function onUpdateStatus(status: string) {
+  async function onUpdateStatus(status) {
     const orderRef = doc(db, "orders", route.params.id);
     await updateDoc(orderRef, {
       status: status,
     });
   }
-  async function onClothChange(cloth: string) {
+  async function onClothChange(cloth) {
     const orderRef = doc(db, "orders", route.params.id);
     await updateDoc(orderRef, {
       isClothtaken: cloth,
     });
   }
-  async function onSourceChange(source: string) {
+  async function onSourceChange(source) {
     const orderRef = doc(db, "orders", route.params.id);
     await updateDoc(orderRef, {
       source: source,
@@ -104,7 +104,7 @@ export function useSingleOrder() {
     partialPrice.value = null
   }
 
-  async function onDeleteOrder(id: any){
+  async function onDeleteOrder(id){
     const permitDelete = confirm("Buyurtmani o'chirishni xohlaysizmi?")
     if(!permitDelete) return;
     await deleteDoc(doc(db, "orders", id));

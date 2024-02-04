@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import { useSingleOrder } from "../composables/singleOrder.ts";
+<script setup>
+import { useSingleOrder } from "../composables/singleOrder.js";
 import { NSpace, NSelect } from "naive-ui";
 
 const {

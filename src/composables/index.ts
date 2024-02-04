@@ -11,11 +11,11 @@ export function useOrder() {
   const orders = ref<IOrder[]>([]);
   const loading = ref<boolean>(false);
 
-  async function fetchOrders() {
+  function fetchOrders() {
     try {
       loading.value = true;
       let items: any = [];
-      await onSnapshot(collection(db, "orders"), (orderSnapshot) => {
+      onSnapshot(collection(db, "orders"), (orderSnapshot) => {
         orderSnapshot.forEach((order) => {
           items.push({
             id: order.id,
