@@ -2,7 +2,7 @@ type NumOrString = number | string;
 type NumOrNull = null | number;
 
 export interface IOrder {
-  id?: NumOrString;
+  id: string | number;
   status: string;
   acceptedAt: NumOrString;
   title: string;
@@ -20,4 +20,12 @@ export interface IOrder {
   deliveryType: string;
   deliveryCost: NumOrNull;
   description?: string;
+};
+export interface formOrder {
+  id: string | number
+  index: number
+  title: string,
+  date: string | number
+  cloth: string
+  status: string
 }

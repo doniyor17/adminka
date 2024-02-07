@@ -1,21 +1,25 @@
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { IOrder } from "../models/index.js";
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import { IOrder, formOrder } from "../models/index.js";
+import { collection, addDoc, onSnapshot, query } from "firebase/firestore";
 import { db } from "../firebase.js";
+import useDayjs from "../utils/dayjs.ts";
 import { errorToast } from "../utils/toast.js";
+
 
 export function useOrder() {
   const router = useRouter();
   const route = useRoute();
-  const orders = ref<IOrder[]>([]);
+  const orders = ref<formOrder[]>([]);
   const loading = ref<boolean>(false);
+  const { toDDMMYYYYDot } = useDayjs();
 
   function fetchOrders() {
     try {
       loading.value = true;
       let items: any = [];
-      onSnapshot(collection(db, "orders"), (orderSnapshot) => {
+      const queryReq = query(collection(db, "orders"))
+      onSnapshot(queryReq, (orderSnapshot) => {
         orderSnapshot.forEach((order) => {
           items.push({
             id: order.id,
@@ -23,13 +27,26 @@ export function useOrder() {
           });
         });
         loading.value = false;
-        orders.value = items;
+        orders.value = formatOrders(items);
       });
     } catch (err) {
       errorToast("Xatolik yuz berdi!");
     } finally {
       loading.value = false;
     }
+  }
+
+  function formatOrders(orders: IOrder[]): formOrder[] {
+    return orders.map((order, i) => {
+      return {
+        index: i + 1,
+        id: order.id,
+        title: order.title.slice(0, 15) + '...',
+        date: toDDMMYYYYDot(order.acceptedAt),
+        cloth: order.cloth.slice(0, 15) + '...',
+        status: order.status
+      }
+    })
   }
 
   async function addOrder(order: IOrder) {
