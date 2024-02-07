@@ -22,6 +22,15 @@ export interface IOrder {
   description?: string;
 };
 
+export interface IOrderItem {
+  id?: number;
+  title: string;
+  cloth: string;
+  color: string;
+  colorCode: string;
+  price: NumOrNull;
+};
+
 export interface INewOrder {
   status: string;
   acceptedAt: NumOrString;
