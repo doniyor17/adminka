@@ -1,19 +1,18 @@
 <script setup lang="ts">
 // import { ref } from 'vue';
 import { useOrder } from "../composables/index.ts";
-import { IOrder } from "../models/index.ts";
-import useDayjs from "../utils/dayjs.ts";
+import { formOrder } from "../models/index.ts";
 // import Loader from "../components/loading.vue";
 
 const { router, orders } = useOrder();
-const { toDDMMYYYYDot } = useDayjs();
+
 
 // Touch event variables
 // const startX = ref(0);
 // const startY = ref(0);
 // const swipingId = ref(null);
 
-function onSelectOrder(order: IOrder) {
+function onSelectOrder(order: formOrder) {
   router.push({ name: "single-order", params: { id: order.id } });
 }
 
@@ -53,44 +52,50 @@ function onChangeRouter(){
     <template v-else>
       <table class="w-full">
         <thead>
-          <tr class="text-center border-b-[2px]">
-            <th class="w-[30%]">Nomi</th>
-            <th class="w-[30%]">Sanasi</th>
-            <th class="w-[20%]">Matosi</th>
-            <th class="w-[20%]">Holati</th>
+          <tr class="border-b-[2px]">
+            <th class="">#</th>
+            <th class="">Nomi</th>
+            <th class="">Sanasi</th>
+            <th class="">Matosi</th>
+            <th class="">Holati</th>
           </tr>
         </thead>
         <tbody>
           <tr
-              v-for="order of orders"
-              :key="order?.name"
+              v-for="(order, index) of orders"
+              :key="order?.id"
               ref="orderItem"
               class="text-center border-b-[1px] cursor-pointer"
               @click="onSelectOrder(order)"
-            >
+          >
             <!-- @touchstart="onTouchStart(order.id)"
             @touchmove="onTouchMove(order.id)"
             @touchend="onTouchEnd(order.id)" -->
-            <td class="py-2 truncated">
+            <td class="py-2 pe-2">
+              {{ index + 1 }}
+            </td>
+            <td class="py-2 pe-2 !text-left capitalize">
               {{ order.title }}
             </td>
-            <td class="py-2 truncate overflow-hidden">
-              {{ toDDMMYYYYDot(order.date ? order.date : 0) }}
+            <td class="py-2 pe-2 capitalize">
+              {{ order.date }}
             </td>
-            <td class="py-2 truncate overflow-hidden">{{ order.cloth }}</td>
+            <td class="py-2 text-left capitalize">
+              {{ order.cloth }}
+            </td>
             <td
             	v-if="order.status == 'accepted'"
-            	class="py-2 truncated"
+            	class="py-2 truncate"
             >
               Qabul qilindi
             </td>
             <td
             	v-if="order.status == 'done'"
-            	class="py-2 truncated"
+            	class="py-2 truncate"
             >Tugadi</td>
             <td
             	v-if="order.status == 'inProgress'"
-            	class="py-2 truncated"
+            	class="py-2 truncate"
             >
               Tikilyapti
             </td>
@@ -104,9 +109,8 @@ function onChangeRouter(){
 /* .swipe-delete {
   transform: translateX(-100%);
 } */
-.truncated {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+tr:nth-child(even) {
+padding: 0 5px;
+  background-color: #D6EEEE;
 }
 </style>

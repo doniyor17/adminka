@@ -25,7 +25,7 @@ function onToggle() {
   >
     <div class="flex justify-center mt-5 mb-[200px]">
       <span class="me-2 w-[6px] bg-primary" />
-      <h2 class="uppercase text-[34px] font-[600]">نور عيني</h2>
+      <h2 class="title text-[34px] font-[600]">نور عيني</h2>
     </div>
     <div class="text-left" @click="onToggle">
       <router-link
@@ -55,6 +55,9 @@ function onToggle() {
 <style>
 body {
   font-family: "Josefin Sans", sans-serif;
+}
+.title {
+  font-family: "Noto Kufi Arabic", sans-serif;
 }
 .full {
   width: 100%;
