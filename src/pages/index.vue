@@ -62,7 +62,7 @@ function onChangeRouter(){
         </thead>
         <tbody>
           <tr
-              v-for="order of orders"
+              v-for="(order, index) of orders"
               :key="order?.id"
               ref="orderItem"
               class="text-center border-b-[1px] cursor-pointer"
@@ -72,7 +72,7 @@ function onChangeRouter(){
             @touchmove="onTouchMove(order.id)"
             @touchend="onTouchEnd(order.id)" -->
             <td class="py-2 pe-2">
-              {{ order.index }}
+              {{ index + 1 }}
             </td>
             <td class="py-2 pe-2 !text-left capitalize">
               {{ order.title }}
@@ -110,6 +110,7 @@ function onChangeRouter(){
   transform: translateX(-100%);
 } */
 tr:nth-child(even) {
+padding: 0 5px;
   background-color: #D6EEEE;
 }
 </style>

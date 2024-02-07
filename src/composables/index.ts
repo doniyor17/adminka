@@ -37,9 +37,8 @@ export function useOrder() {
   }
 
   function formatOrders(orders: IOrder[]): formOrder[] {
-    return orders.map((order, i) => {
+    return orders.map((order) => {
       return {
-        index: i + 1,
         id: order.id,
         title: order.title.slice(0, 15) + '...',
         date: toDDMMYYYYDot(order.acceptedAt),
