@@ -2,7 +2,7 @@
 import { reactive, ref } from "vue";
 import { useOrder } from "../composables/index.ts";
 
-import { NSpace, NInput, NInputNumber, NDatePicker, NSelect } from "naive-ui";
+import { NSpace, NInput, NInputNumber, NDatePicker, NColorPicker, NSelect } from "naive-ui";
 
 const newOrder = reactive({
   status: "accepted",
@@ -10,6 +10,7 @@ const newOrder = reactive({
   title: "",
   cloth: "",
   color: "",
+  colorCode: "",
   source: "instagram",
   isClothtaken: "no-taken",
   date: Date.now(),
@@ -67,6 +68,7 @@ function onSubmit() {
   if (
     !newOrder.cloth &&
     !newOrder.color &&
+    !newOrder.colorCode &&
     !newOrder.date &&
     !newOrder.deliveryCost &&
     !newOrder.deliveryType &&
@@ -85,6 +87,7 @@ function onSubmit() {
     (newOrder.title = "");
     (newOrder.cloth = "");
     (newOrder.color = "");
+    (newOrder.colorCode = "");
     (newOrder.source = "instagram");
     (newOrder.isClothtaken = "no-taken");
     (newOrder.date = Date.now());
@@ -134,6 +137,24 @@ function onSubmit() {
     </div>
     <div class="flex items-center">
       <div class="w-[50%]">
+        <div>Qabul qilish sanasi</div>
+        <n-space vertical class="mb-3">
+          <n-date-picker
+            v-model:value="newOrder.acceptedAt"
+            type="date"
+            clearable
+          />
+        </n-space>
+      </div>
+      <div class="w-[50%]">
+        <div>Tugatish sanasi</div>
+        <n-space vertical class="mb-3">
+          <n-date-picker v-model:value="newOrder.date" clearable type="date" />
+        </n-space>
+      </div>
+    </div>
+    <div class="flex items-center">
+      <div class="w-[50%]">
         <div>Libos rangi</div>
         <n-space vertical class="mb-3">
           <n-input
@@ -144,9 +165,13 @@ function onSubmit() {
         </n-space>
       </div>
       <div class="w-[50%]">
-        <div>Tugatish sanasi</div>
+        <div class="mt-[7px]">Libos rangi (kod)</div>
         <n-space vertical class="mb-3">
-          <n-date-picker v-model:value="newOrder.date" clearable type="date" />
+          <n-color-picker 
+            default-value="#D39353"
+            :modes="['hex']"
+            v-model:value="newOrder.colorCode"
+          />
         </n-space>
       </div>
     </div>

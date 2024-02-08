@@ -1,15 +1,15 @@
-type NumOrString = number | string;
 type NumOrNull = null | number;
 
 export interface IOrder {
   id?: string | number;
   status: string;
-  acceptedAt: NumOrString;
+  acceptedAt: number | string | null;
   title: string;
   cloth: string;
   color: string;
+  colorCode: string;
   source: string;
-  date: number | null | undefined;
+  date: number | string | null;
   isClothtaken: string;
   price: NumOrNull;
   partialPrice?: NumOrNull;
@@ -24,12 +24,13 @@ export interface IOrder {
 
 export interface INewOrder {
   status: string;
-  acceptedAt: NumOrString;
+  acceptedAt: number | string | null;
   title: string;
   cloth: string;
   color: string;
+  colorCode: string;
   source: string;
-  date: number | null | undefined;
+  date: number | string | null;
   isClothtaken: string;
   price: NumOrNull;
   partialPrice?: NumOrNull;
@@ -44,7 +45,7 @@ export interface INewOrder {
 export interface formOrder {
   id?: string | number
   title: string,
-  date: string | number
+  date: number | string | null;
   cloth: string
   status: string
 }
