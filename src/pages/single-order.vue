@@ -1,6 +1,6 @@
 <script setup>
 import { useSingleOrder } from "../composables/singleOrder.js";
-import { NSpace, NSelect } from "naive-ui";
+import { NSpace, NSelect, NColorPicker } from "naive-ui";
 
 const {
   status,
@@ -79,6 +79,12 @@ const {
   <div class="flex items-center mb-3">
     <div class="w-[35%] font-semibold">Rangi</div>
     <div class="w-[65%]">{{ singleOrder?.color }}</div>
+  </div>
+  <div class="flex items-center mb-3">
+    <div class="w-[35%] font-semibold">Rangi (kod)</div>
+    <div class="w-[65%]">
+      <div class="w-[100px]" :class="`bg-[${singleOrder.colorCode}]`"></div>
+    </div>
   </div>
   <div class="flex items-center mb-3">
     <div class="w-[35%] font-semibold">Narxi</div>
