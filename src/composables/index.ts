@@ -1,7 +1,7 @@
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { IOrder, formOrder } from "../models/index.js";
-import { collection, addDoc, onSnapshot, query } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, query, orderBy } from "firebase/firestore";
 import { db } from "../firebase.js";
 import useDayjs from "../utils/dayjs.ts";
 import { errorToast } from "../utils/toast.js";
@@ -18,7 +18,7 @@ export function useOrder() {
     try {
       loading.value = true;
       let items: any = [];
-      const queryReq = query(collection(db, "orders"))
+      const queryReq = query(collection(db, "orders"), orderBy('acceptedAt', 'desc'))
       onSnapshot(queryReq, (orderSnapshot) => {
         orderSnapshot.forEach((order) => {
           items.push({
