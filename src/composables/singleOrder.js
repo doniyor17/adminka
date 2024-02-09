@@ -15,6 +15,7 @@ export function useSingleOrder() {
   const source = ref("");
   const clothTaken = ref("");
   const partialPrice = ref(null);
+  const colorCode = ref('');
 
   const singleOrder = ref(null);
   const statusOptions = ref([
@@ -116,6 +117,7 @@ export function useSingleOrder() {
     status.value = singleOrder.value.status;
     clothTaken.value = singleOrder.value.isClothtaken;
     source.value = singleOrder.value.source;
+    colorCode.value = singleOrder.value.colorCode;
   });
 
   return {
@@ -130,6 +132,7 @@ export function useSingleOrder() {
     sourceOptions,
     statusOptions,
     singleOrder,
+    colorCode,
     onUpdateStatus,
     onClothChange,
     onSourceChange,

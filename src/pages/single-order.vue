@@ -14,12 +14,14 @@ const {
   statusOptions,
   partialPrice,
   singleOrder,
+  colorCode,
   onUpdateStatus,
   onClothChange,
   onSourceChange,
   onDeleteOrder,
   onChangePrice
 } = useSingleOrder();
+
 </script>
 
 <template>
@@ -83,7 +85,16 @@ const {
   <div class="flex items-center mb-3">
     <div class="w-[35%] font-semibold">Rangi (kod)</div>
     <div class="w-[65%]">
-      <div class="w-[100px]" :class="`bg-[${singleOrder.colorCode}]`"></div>
+      <div 
+        v-if="singleOrder?.colorCode" 
+        class="w-[100px] h-5" 
+        :style="`background-color: ${colorCode};`"
+      />
+      <div 
+        v-else 
+      >
+        Rang kodi tanlanmagan
+      </div>
     </div>
   </div>
   <div class="flex items-center mb-3">
