@@ -1,11 +1,16 @@
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { IOrder, formOrder } from "../models/index.js";
-import { collection, addDoc, onSnapshot, query, orderBy } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  query,
+  orderBy,
+} from "firebase/firestore";
 import { db } from "../firebase.js";
 import useDayjs from "../utils/dayjs.ts";
 import { errorToast } from "../utils/toast.js";
-
 
 export function useOrder() {
   const router = useRouter();
@@ -18,7 +23,10 @@ export function useOrder() {
     try {
       loading.value = true;
       let items: any = [];
-      const queryReq = query(collection(db, "orders"), orderBy('acceptedAt', 'desc'))
+      const queryReq = query(
+        collection(db, "orders"),
+        orderBy("acceptedAt", "desc"),
+      );
       onSnapshot(queryReq, (orderSnapshot) => {
         orderSnapshot.forEach((order) => {
           items.push({
@@ -40,12 +48,12 @@ export function useOrder() {
     return orders.map((order) => {
       return {
         id: order.id,
-        title: order.title.slice(0, 15) + '...',
+        title: order.title.slice(0, 15) + "...",
         date: toDDMMYYYYDot(order.acceptedAt),
-        cloth: order.cloth.slice(0, 15) + '...',
-        status: order.status
-      }
-    })
+        cloth: order.cloth.slice(0, 15) + "...",
+        status: order.status,
+      };
+    });
   }
 
   async function addOrder(order: IOrder) {
