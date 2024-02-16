@@ -25,7 +25,8 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "src/router/index.ts", "src/composables/singleOrder.js",
+    "src/router/index.ts",
+    "src/composables/singleOrder.js",
   ],
   "references": [{ "path": "./tsconfig.node.json" }],
 }

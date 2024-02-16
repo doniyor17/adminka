@@ -19,14 +19,12 @@ const {
   onClothChange,
   onSourceChange,
   onDeleteOrder,
-  onChangePrice
+  onChangePrice,
 } = useSingleOrder();
-
 </script>
 
 <template>
-  <div class="flex items-center justify-between mb-3"
-  >
+  <div class="flex items-center justify-between mb-3">
     <div>
       <n-space vertical>
         <n-select
@@ -71,11 +69,11 @@ const {
     <div class="w-[35%] font-semibold">Nomi</div>
     <div class="w-[65%]">{{ singleOrder?.title }}</div>
     <button
-    	v-if="status === 'done'"
-    	class="bg-btnBg w-[30px] h-[30px] rounded-md shadow-md"
-    	@click="onDeleteOrder(singleOrder.id)"
+      v-if="status === 'done'"
+      class="bg-btnBg w-[30px] h-[30px] rounded-md shadow-md"
+      @click="onDeleteOrder(singleOrder.id)"
     >
-      <span class="fa-solid fa-trash"/>
+      <span class="fa-solid fa-trash" />
     </button>
   </div>
   <div class="flex items-center mb-3">
@@ -85,16 +83,12 @@ const {
   <div class="flex items-center mb-3">
     <div class="w-[35%] font-semibold">Rangi (kod)</div>
     <div class="w-[65%]">
-      <div 
-        v-if="singleOrder?.colorCode" 
-        class="w-[100px] h-5" 
+      <div
+        v-if="singleOrder?.colorCode"
+        class="w-[100px] h-5"
         :style="`background-color: ${colorCode};`"
       />
-      <div 
-        v-else 
-      >
-        Rang kodi tanlanmagan
-      </div>
+      <div v-else>Rang kodi tanlanmagan</div>
     </div>
   </div>
   <div class="flex items-center mb-3">
@@ -105,23 +99,12 @@ const {
   </div>
   <div class="flex items-center mb-3">
     <div class="w-[35%] font-semibold">To'lov turi</div>
-    <div
-    	v-if="singleOrder?.payment === 'full'"
-    	class="w-[65%]"
-    >
-      To'liq
-    </div>
-    <div
-    	v-else
-    	class="w-[65%] flex items-center"
-    >
+    <div v-if="singleOrder?.payment === 'full'" class="w-[65%]">To'liq</div>
+    <div v-else class="w-[65%] flex items-center">
       <div class="me-3">To'liq emas</div>
     </div>
   </div>
-  <div
-  	v-if="singleOrder?.payment !== 'full'"
-  	class="flex items-center mb-3"
-  >
+  <div v-if="singleOrder?.payment !== 'full'" class="flex items-center mb-3">
     <div class="w-[35%] font-semibold">To'langan summa</div>
     <div class="flex items-center w-[65%]">
       <div class="me-1">

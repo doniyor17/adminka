@@ -2,7 +2,14 @@
 import { reactive, ref } from "vue";
 import { useOrder } from "../composables/index.ts";
 
-import { NSpace, NInput, NInputNumber, NDatePicker, NColorPicker, NSelect } from "naive-ui";
+import {
+  NSpace,
+  NInput,
+  NInputNumber,
+  NDatePicker,
+  NColorPicker,
+  NSelect,
+} from "naive-ui";
 
 const newOrder = reactive({
   status: "accepted",
@@ -82,24 +89,24 @@ function onSubmit() {
   }
 
   addOrder(newOrder);
-  (newOrder.status = "accepted");
-    (newOrder.acceptedAt = Date.now());
-    (newOrder.title = "");
-    (newOrder.cloth = "");
-    (newOrder.color = "");
-    (newOrder.colorCode = "");
-    (newOrder.source = "instagram");
-    (newOrder.isClothtaken = "no-taken");
-    (newOrder.date = Date.now());
-    (newOrder.price = null);
-    (newOrder.partialPrice = null);
-    (newOrder.payment = "full");
-    (newOrder.name = "");
-    (newOrder.address = "");
-    (newOrder.phone = "");
-    (newOrder.deliveryType = "");
-    (newOrder.deliveryCost = null);
-    (newOrder.description = "");
+  newOrder.status = "accepted";
+  newOrder.acceptedAt = Date.now();
+  newOrder.title = "";
+  newOrder.cloth = "";
+  newOrder.color = "";
+  newOrder.colorCode = "";
+  newOrder.source = "instagram";
+  newOrder.isClothtaken = "no-taken";
+  newOrder.date = Date.now();
+  newOrder.price = null;
+  newOrder.partialPrice = null;
+  newOrder.payment = "full";
+  newOrder.name = "";
+  newOrder.address = "";
+  newOrder.phone = "";
+  newOrder.deliveryType = "";
+  newOrder.deliveryCost = null;
+  newOrder.description = "";
 }
 </script>
 
@@ -167,7 +174,7 @@ function onSubmit() {
       <div class="w-[50%]">
         <div class="mt-[7px]">Libos rangi (kod)</div>
         <n-space vertical class="mb-3">
-          <n-color-picker 
+          <n-color-picker
             default-value="#D39353"
             :modes="['hex']"
             v-model:value="newOrder.colorCode"

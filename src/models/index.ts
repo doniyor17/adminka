@@ -20,7 +20,7 @@ export interface IOrder {
   deliveryType: string;
   deliveryCost: NumOrNull;
   description?: string;
-};
+}
 
 export interface INewOrder {
   status: string;
@@ -41,11 +41,11 @@ export interface INewOrder {
   deliveryType: string;
   deliveryCost: NumOrNull;
   description?: string;
-};
+}
 export interface formOrder {
-  id?: string | number
-  title: string,
+  id?: string | number;
+  title: string;
   date: number | string | null;
-  cloth: string
-  status: string
+  cloth: string;
+  status: string;
 }

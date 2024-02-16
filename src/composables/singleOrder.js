@@ -15,7 +15,7 @@ export function useSingleOrder() {
   const source = ref("");
   const clothTaken = ref("");
   const partialPrice = ref(null);
-  const colorCode = ref('');
+  const colorCode = ref("");
 
   const singleOrder = ref(null);
   const statusOptions = ref([
@@ -86,15 +86,16 @@ export function useSingleOrder() {
     });
   }
   async function onChangePrice() {
-    const totalPrice = +singleOrder.value.partialPrice + (partialPrice.value - 0);
+    const totalPrice =
+      +singleOrder.value.partialPrice + (partialPrice.value - 0);
 
-    if(isNaN(totalPrice) && !totalPrice) return;
-      
+    if (isNaN(totalPrice) && !totalPrice) return;
+
     const orderRef = doc(db, "orders", route.params.id);
-    if(totalPrice >= parseInt(singleOrder.value.price)) {
+    if (totalPrice >= parseInt(singleOrder.value.price)) {
       await updateDoc(orderRef, {
         partialPrice: totalPrice,
-        payment: 'full'
+        payment: "full",
       });
     } else {
       await updateDoc(orderRef, {
@@ -102,14 +103,14 @@ export function useSingleOrder() {
       });
     }
     await fetchOrderByID(route.params.id);
-    partialPrice.value = null
+    partialPrice.value = null;
   }
 
-  async function onDeleteOrder(id){
-    const permitDelete = confirm("Buyurtmani o'chirishni xohlaysizmi?")
-    if(!permitDelete) return;
+  async function onDeleteOrder(id) {
+    const permitDelete = confirm("Buyurtmani o'chirishni xohlaysizmi?");
+    if (!permitDelete) return;
     await deleteDoc(doc(db, "orders", id));
-    router.push('/')
+    router.push("/");
   }
 
   onMounted(async () => {
@@ -137,6 +138,6 @@ export function useSingleOrder() {
     onClothChange,
     onSourceChange,
     onDeleteOrder,
-    onChangePrice
+    onChangePrice,
   };
 }
